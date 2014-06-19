@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20140619030720) do
 
   create_table "clock_times", :force => true do |t|
     t.integer  "employee_id"
-    t.boolean  "in"
+    t.boolean  "clockin"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
