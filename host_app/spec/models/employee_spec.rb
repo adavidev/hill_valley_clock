@@ -48,4 +48,27 @@ describe Employee do
       @employee.clocked_in?.should == false
     end
   end
+
+  describe :last_clocked do
+    before :each do
+      @employee = Employee.new
+      @employee.pin = "1234"
+      @employee.save
+      ClockTime.create(employee_id: @employee.id)
+    end
+
+    it "should show the employees last time logged" do
+      @employee.last_clocked.should == ClockTime.last_clock(@employee.id).created_at
+    end
+  end
+
+  describe :last_weeks_clocks do
+    xit "should return all of last 7 days' clocks for this employee" do
+
+    end
+
+    xit "should return all employees' clocks for the past 7 days" do 
+
+    end
+  end
 end

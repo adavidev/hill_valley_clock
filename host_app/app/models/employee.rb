@@ -25,4 +25,12 @@ class Employee < ActiveRecord::Base
   def clocked_in?
     ClockTime.last_clock(self.id).clockin
   end
+
+  def last_clocked
+    ClockTime.last_clock(id).created_at
+  end
+
+  def last_weeks_clocks
+    # ClockTime.
+  end
 end

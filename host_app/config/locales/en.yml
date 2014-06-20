@@ -14,3 +14,6 @@ en:
     last_name: "Last name"
     pin: "ID"
     employee_type: "Type"
+    create: "Create new employee"
+    clocked_in: "Clocked in"
+    clock_in_success: "Successfully clocked in."

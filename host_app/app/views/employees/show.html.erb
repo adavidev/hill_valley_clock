@@ -1,7 +1,31 @@
-<p>
-  <b>Pin:</b>
-  <%= @employee.pin %>
-</p>
+<ul>
+  <li>
+    <b><%= t("employee.first_name") %></b>
+    <%= @employee.first_name %>
+  </li>
+  <li>
+    <b><%= t("employee.last_name") %></b>
+    <%= @employee.last_name %>
+  </li>
+  <li>
+    <b><%= t("employee.pin") %></b>
+    <%= @employee.pin %>
+  </li>
+  <li>
+    <b><%= t("employee.employee_type") %></b>
+    <%= @employee.employee_type %>
+  </li>
+  <li>
+    <b><%= t("employee.clocked_in") %></b>
+    <%= @employee.clocked_in? %>
+  </li>
+  <li>
+    <b><%= t("employee.last_clock") %></b>
+    <%= @employee.last_clocked %>
+  </li>
+</ul>
+
+<%= render "#{@employee.employee_type}_stats" %>
 
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |

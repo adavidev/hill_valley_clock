@@ -25,6 +25,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(params[:employee])
 
     if @employee.save
+      ClockTime.create(employee_id: @employee.id)
       flash[:notice] = t('employee.successfully_created')
       redirect_to @employee
     else
