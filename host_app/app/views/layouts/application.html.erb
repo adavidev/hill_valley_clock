@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCtype html>
 <html>
 <head>
   <title>HostApp</title>
@@ -8,10 +8,17 @@
 </head>
 <body>
 
-<%= yield %>
+  <%= yield %>
 
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+  <% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:errors] %>
+  <div id="error_explanation">
+      <% flash[:errors].each do |msg| %>
+      <div><%= msg %></div>
+      <% end %>
+  </div>
   <% end %>
 </body>
 </html>

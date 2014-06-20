@@ -1,9 +1,9 @@
 class EmployeesController < ApplicationController
   respond_to :html
 
-  before_filter :load_employee, except: [:index, :new, :create]
+  before_filter :find_employee, except: [:index, :new, :create]
 
-  def load_employee
+  def find_employee
     @employee = Employee.find(params[:id])
   end
 
@@ -28,21 +28,19 @@ class EmployeesController < ApplicationController
       flash[:notice] = t('employee.successfully_created')
       redirect_to @employee
     else
-      flash[:notice] = t('employee.failed_create')
+      flash[:errors] = @employee.errors.full_messages
       render action: "new"
     end
   end
 
   def update
-    respond_to do |format|
       if @employee.update_attributes(params[:employee])
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-        format.json { head :no_content }
+        flash[:notice] = t('employee.successfully_updated')
+        redirect_to @employee
       else
-        format.html { render action: "edit" }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
+        flash[:errors] = @employee.errors.full_messages
+        render action: "edit"
       end
-    end
   end
 
 

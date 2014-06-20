@@ -5,12 +5,12 @@ class ClockTime < ActiveRecord::Base
 
   before_create :set_clockin_status
 
-  def last_clock(employee_id)
-    self.class.find_all_by_employee_id(employee_id).last
+  def self.last_clock(employee_id)
+    find_all_by_employee_id(employee_id).last
   end
 
   def set_clockin_status
-    last = last_clock(employee_id)
+    last = self.class.last_clock(employee_id)
     self.clockin = last ? !last.clockin : true
     true
   end
