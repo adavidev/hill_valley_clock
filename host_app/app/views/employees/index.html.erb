@@ -1,23 +1,7 @@
-<h1>Listing employees</h1>
-
-<table>
-  <tr>
-    <th>Pin</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @employees.each do |employee| %>
-  <tr>
-    <td><%= employee.pin %></td>
-    <td><%= link_to 'Show', employee %></td>
-    <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-    <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Employee', new_employee_path %>
+<div id="content-box">
+  <%= form_for @employee, url: clock_time_index_path do |f| %>
+    <%= f.text_field :pin %>
+    <%= f.submit %>
+  <% end %>
+</div>
+<%= link_to t('employee.new'), new_employee_path %>

@@ -19,8 +19,8 @@ describe ClockTime do
    end
 
    it "should not be affected by clockins of other employees" do
-     em1 = Employee.create!
-     em2 = Employee.create!
+     em1 = Employee.create!(pin: "a")
+     em2 = Employee.create!(pin: "b")
      ct = ClockTime.create!(employee_id:em1.id)
      ct2 = ClockTime.create!(employee_id:em2.id)
      ct3 = ClockTime.create!(employee_id:em1.id)

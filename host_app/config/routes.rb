@@ -1,7 +1,7 @@
 HostApp::Application.routes.draw do
-  resources :employees do
-    resources :clock_time, only: :create
-  end
+  resources :employees
+
+  resources :clock_time, only: [:create]
 
   root to: "employees#index"
 end

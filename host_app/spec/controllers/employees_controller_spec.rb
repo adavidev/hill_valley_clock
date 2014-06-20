@@ -10,10 +10,9 @@ describe EmployeesController do
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all employees as @employees" do
-      employee = Employee.create! valid_attributes
+    it "should respond with success" do
       get :index, {}, valid_session
-      assigns(:employees).should eq([employee])
+      response.should be_success
     end
   end
 

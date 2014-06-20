@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  respond_to :html
 
   before_filter :load_employee, except: [:index, :new, :create]
 
@@ -7,28 +8,14 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    @employees = Employee.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @employees }
-    end
+    @employee = Employee.new
   end
 
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @employee }
-    end
   end
 
   def new
     @employee = Employee.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @employee }
-    end
   end
 
   def edit
@@ -37,14 +24,12 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(params[:employee])
 
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
-        format.json { render json: @employee, status: :created, location: @employee }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
+    if @employee.save
+      flash[:notice] = t('employee.successfully_created')
+      redirect_to @employee
+    else
+      flash[:notice] = t('employee.failed_create')
+      render action: "new"
     end
   end
 
