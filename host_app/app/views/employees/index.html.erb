@@ -2,8 +2,12 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <%= form_for @employee, url: clock_time_index_path do |f| %>
-      <%= f.text_field :pin %>
-      <%= f.submit "Search", class: "btn btn-danger" %>
+        <div class="col-md-8">
+          <%= f.text_field :pin, {:placeholder => t("employee.enter_pin"), class:"form-control"}%>
+        </div>
+        <div class="col-md-4">
+          <%= f.submit "Search", class: "btn btn-block btn-danger" %>
+        </div>
       <% end %>
     </div>
   </div>

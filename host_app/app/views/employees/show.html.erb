@@ -1,31 +1,52 @@
-<div class="panel panel-info">
+<%="<div class='panel panel-info #{'admin' if @employee.admin?}'>".html_safe %>
   <div class='panel-heading'><%= t("employee.clocked") + I18n.t("clock_time.clockin.#{@employee.clocked_in?}") %></div>
   <div class="panel-body text-left">
-
-      <b><%= t("employee.first_name") %></b>
-      <%= @employee.first_name %>
-      <br>
-      <b><%= t("employee.last_name") %></b>
-      <%= @employee.last_name %>
-      <br>
-      <b><%= t("employee.pin") %></b>
-      <%= @employee.pin %>
-      <br>
-      <b><%= t("employee.employee_type") %></b>
-      <%= @employee.employee_type %>
-      <br>
-      <b><%= t("employee.clocked_in") %></b>
-      <%= @employee.clocked_in? %>
-      <br>
-      <b><%= t("employee.last_clock") %></b>
-      <%= @employee.last_clocked %>
-      <br>
+    <div class=row>
+      <div class='col-md-6'>
+        <b><%= t("employee.first_name") %></b>
+        <%= @employee.first_name %>
+        <br>
+        <b><%= t("employee.last_name") %></b>
+        <%= @employee.last_name %>
+        <br>
+        <b><%= t("employee.pin") %></b>
+        <%= @employee.pin %>
+        <br>
+        <b><%= t("employee.employee_type") %></b>
+        <%= @employee.employee_type %>
+        <br>
+        <b><%= t("employee.clocked_in") %></b>
+        <%= @employee.clocked_in? %>
+        <br>
+        <b><%= t("employee.last_clock") %></b>
+        <%= @employee.last_clocked %>
+        <br>
+      </div>
+      <div class='col-md-6'>
+        <b><%= t("employee.time_worked") %></b>
+        <%= @employee.time_worked.round(2) %>
+        <br>
+        <b><%= t("employee.time_worked_this_week") %></b>
+        <%= @employee.time_worked_this_week.round(2) %>
+        <br>
+      </div>
+    </div>
 
     <div class='well clocks-well'>
       <% @employee.last_weeks_clocks.each do |clock| %>
       <div><%= clock %></div>
       <% end %>
     </div>
+
+    <% if @employee.admin? %>
+    <div class='well admin-well'>
+      <% Employee.all.each do |employee|%>
+        <b><%= employee.pin %></b>
+        <%= employee.time_worked.round(2) %>
+        <br>
+      <% end %>
+    </div>
+    <% end %>
 
     <div class="btn-group btn-group-justified">
       <%= link_to 'Edit', edit_employee_path(@employee), { class:"btn btn-default" } %>

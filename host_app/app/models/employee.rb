@@ -1,7 +1,7 @@
 class Employee < ActiveRecord::Base
   attr_accessible :pin, :employee_id, :first_name, :last_name, :employee_type
 
-  has_many :clock_times
+  has_many :clock_times, dependent: :destroy
 
   validates :pin, uniqueness: true
   validate :type_in_valid_types
@@ -30,9 +30,22 @@ class Employee < ActiveRecord::Base
     ClockTime.last_clock(id).created_at
   end
 
+  def time_worked
+    clock_times.last.elapsed_time / 3600
+  end
+
+  def time_worked_this_week
+    clock_times.for_date_range(DateTime.now - 7, DateTime.now)
+    .map {|ct| ct.elapsed_time}.inject(:+) / 3600
+  end
+
   def last_weeks_clocks
     clock_times = ClockTime.for_date_range(DateTime.now - 7, DateTime.now)
 
     employee_type == "employee" ? clock_times.for_employee(id) : clock_times
+  end
+
+  def admin?
+    employee_type == "administrator"
   end
 end

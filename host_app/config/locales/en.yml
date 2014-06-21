@@ -4,11 +4,13 @@
 en:
   cancel: "Cancel"
   save: "Save"
+  destroy: "Delete"
   clock_time:
     clockin:
       "true": "in"
       "false": "out"
   employee:
+    enter_pin: "Enter employee pin number"
     not_found: "Employee not found"
     new: 'New Employee'
     edit: 'Editing employee'
@@ -23,3 +25,5 @@ en:
     clocked_in: "Clocked in"
     clock_in_success: "Successfully clocked in."
     clocked: "Clocked "
+    time_worked: "Hours Worked"
+    time_worked_this_week: "Hours worked this week"

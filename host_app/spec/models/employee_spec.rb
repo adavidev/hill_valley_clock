@@ -97,4 +97,56 @@ describe Employee do
       end
     end
   end
+
+  describe :time_worked do
+    it "should show the current time worked" do
+      @employee1 = Employee.new
+      @employee1.pin = "123456"
+      @employee1.save
+      @ct = ClockTime.create!(employee_id: @employee1.id, created_at: DateTime.now - 7)
+      @ct1 = ClockTime.create!(employee_id: @employee1.id)
+
+      @employee1.time_worked.floor.should == ((@ct1.elapsed_time) / 3600).floor
+    end
+  end
+
+  describe :time_worked_this_week do
+    context :employee do
+      before :each do
+        @employee1 = Employee.new
+        @employee1.pin = "123456"
+        @employee1.save
+        @ct = ClockTime.create!(employee_id: @employee1.id, created_at: DateTime.now - 7)
+        @ct1 = ClockTime.create!(employee_id: @employee1.id)
+        ClockTime.create!(employee_id: @employee1.id)
+        ClockTime.create!(employee_id: @employee1.id)
+      end
+
+      it "should show all elapsed times for the last 7 days" do
+        @employee1.time_worked_this_week.floor.should == ((@employee1.clock_times
+        .for_date_range(DateTime.now - 7, DateTime.now)
+        .map {|ct| ct.elapsed_time}
+        .inject(:+)) / 3600).floor
+      end
+    end
+  end
+
+  describe :admin? do
+    it "should be true if employee is admin" do
+      @employee1 = Employee.new
+      @employee1.pin = "123456"
+      @employee1.employee_type = "administrator"
+      @employee1.save
+
+      @employee1.admin?.should == true
+    end
+
+    it "should be false if employee is not admin" do
+      @employee1 = Employee.new
+      @employee1.pin = "123456"
+      @employee1.save
+
+      @employee1.admin?.should == false
+    end
+  end
 end

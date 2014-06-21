@@ -71,4 +71,45 @@ describe ClockTime do
       ct1.to_s.should == "#{em1.first_name} #{em1.last_name}: #{I18n.t("clock_time.clockin.true")} #{ct1.created_at}"
     end
   end
+
+  describe :clock_ins do
+    it "should show all clock ins" do
+      ClockTime.create!#in
+      ClockTime.create!
+      ClockTime.create!#in
+      ClockTime.create!
+      ClockTime.create!#in
+      ClockTime.clock_ins.size.should == 3
+    end
+  end
+
+  describe :clock_outs do
+    it "should show all clock outs" do
+      ClockTime.create!#in
+      ClockTime.create!
+      ClockTime.create!#in
+      ClockTime.create!
+      ClockTime.create!#in
+      ClockTime.clock_outs.size.should == 2
+    end
+  end
+
+  describe :elapsed_time do
+    before :each do
+      @em1 = Employee.create!(first_name: "foo", last_name: "bar", pin: "a")
+      @ct1 = ClockTime.create!(employee_id:@em1.id, created_at: DateTime.now - 7)
+      @ct2 = ClockTime.create!(employee_id:@em1.id)
+      @ct4 = ClockTime.create!(employee_id:@em1.id)
+      @ct5 = ClockTime.create!(employee_id:@em1.id)
+    end
+
+    it "should show the elpsed time since the last checkin" do
+      @ct2.elapsed_time.floor.should == (@ct2.created_at - @ct1.created_at).floor
+    end
+
+    it "should show 0 if this is a checkin" do
+      @ct3 = ClockTime.create!(employee_id:@em1.id)
+      @ct3.elapsed_time.should == 0
+    end
+  end
 end

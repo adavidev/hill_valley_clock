@@ -13,6 +13,9 @@ class ClockTime < ActiveRecord::Base
     where("employee_id = ?", employee_id)
   end
 
+  scope :clock_ins, -> { where("clockin = true") }
+  scope :clock_outs, -> { where("clockin = false") }
+
   def self.last_clock(employee_id)
     find_all_by_employee_id(employee_id).last
   end
@@ -23,7 +26,13 @@ class ClockTime < ActiveRecord::Base
     true # because if clockin resolves to false, it wont create
   end
 
+  def elapsed_time
+    clocks = self.class.for_employee(employee_id)
+    clockin ? 0 : (created_at - clocks[clocks.index(self) - 1].created_at)
+  end
+
   def to_s
     "#{employee.first_name} #{employee.last_name}: #{I18n.t("clock_time.clockin.#{clockin}")} #{created_at}"
   end
+
 end
