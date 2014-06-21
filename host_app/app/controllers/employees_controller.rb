@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   respond_to :html
 
-  before_filter :find_employee, except: [:index, :new, :create]
+  before_filter :find_employee, except: [:index, :new, :create, :print]
 
   def find_employee
     @employee = Employee.find(params[:id])
@@ -47,5 +47,9 @@ class EmployeesController < ApplicationController
   def destroy
     @employee.destroy
     redirect_to employees_url
+  end
+
+  def print
+    @employee = Employee.find(params[:employee_id])
   end
 end

@@ -1,0 +1,54 @@
+<%="<div class='#{'admin' if @employee.admin?}'>".html_safe %>
+  <h1 class='panel-heading'><%= t("employee.clocked") + I18n.t("clock_time.clockin.#{@employee.clocked_in?}") %></h1>
+  <div>
+    <b><%= t("employee.first_name") %></b>
+    <%= @employee.first_name %>
+    <br>
+    <b><%= t("employee.last_name") %></b>
+    <%= @employee.last_name %>
+    <br>
+    <b><%= t("employee.pin") %></b>
+    <%= @employee.pin %>
+    <br>
+    <b><%= t("employee.employee_type") %></b>
+    <%= @employee.employee_type %>
+    <br>
+    <b><%= t("employee.clocked_in") %></b>
+    <%= @employee.clocked_in? %>
+    <br>
+    <b><%= t("employee.last_clock") %></b>
+    <%= @employee.last_clocked %>
+    <br>
+  </div>
+  <br>
+  <div>
+    <b><%= t("employee.time_worked") %></b>
+    <%= @employee.time_worked.round(2) %>
+    <br>
+    <b><%= t("employee.time_worked_this_week") %></b>
+    <%= @employee.time_worked_this_week.round(2) %>
+    <br>
+  </div>
+  <br>
+  <div>
+    <b>Employee Times Clocked</b><br>
+    <% @employee.last_weeks_clocks.each do |clock| %>
+    <div><%= clock %></div>
+    <% end %>
+  </div>
+
+  <% if @employee.admin? %>
+  <br>
+  <div>
+    <b>Employee Times Worked</b><br>
+    <% Employee.all.each do |employee|%>
+    <b><%= employee.pin %></b>
+    <%= employee.time_worked.round(2) %>
+    <br>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<%= link_to 'Print', "#", { class:"btn btn-default", onclick:"window.print();return false;" } %>
+</div>

@@ -29,6 +29,7 @@
         <b><%= t("employee.time_worked_this_week") %></b>
         <%= @employee.time_worked_this_week.round(2) %>
         <br>
+        <%= link_to 'Print', employee_print_path(@employee), { class:"btn btn-default"} %>
       </div>
     </div>
 

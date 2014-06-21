@@ -135,4 +135,11 @@ describe EmployeesController do
     end
   end
 
+  describe "GET print" do
+    it "should renders a printable page" do
+      employee = Employee.create! valid_attributes
+      get :print, {employee_id: employee.id}, valid_session
+      response.should be_success
+    end
+  end
 end
