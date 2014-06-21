@@ -1,12 +1,19 @@
-<%= form_for(@employee) do |f| %>
-  <div class="field">
-    <%= f.text_field :first_name, :placeholder => t("employee.first_name") %>
-    <%= f.text_field :last_name, :placeholder => t("employee.last_name") %>
-    <%= f.text_field :pin, :placeholder => t("employee.pin") %>
-    <%= f.text_field :employee_type, :placeholder => t("employee.employee_type") %>
+<%= form_for @employee, html: {class:"text-center"} do |f| %>
+<div class="row form-group">
+  <div class="col-md-6">
+    <%= f.text_field :first_name, {:placeholder => t("employee.first_name"), class:"form-control"} %>
   </div>
-  <div class="actions">
-    <%= f.submit t("save") %>
-    <%= link_to t("cancel"), employees_path %>
+  <div class="col-md-6">
+    <%= f.text_field :last_name, {:placeholder => t("employee.last_name"), class:"form-control"} %>
   </div>
+</div>
+<div class="row form-group">
+  <div class="col-md-6">
+    <%= f.text_field :pin,{:placeholder => t("employee.pin"), class:"form-control"} %>
+  </div>
+  <div class="col-md-6">
+    <%= f.text_field :employee_type, {:placeholder => t("employee.employee_type"), class:"form-control"} %>
+  </div>
+</div>
+<button type="submit" class="btn btn-default btn-lg btn-block"><%= t "save" %></button>
 <% end %>

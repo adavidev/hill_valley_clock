@@ -63,4 +63,12 @@ describe ClockTime do
       ClockTime.for_date_range(DateTime.now - 7, DateTime.now).size.should == 2
     end
   end
+
+  describe :to_s do
+    it "should show a string representation of clock time" do
+      em1 = Employee.create!(first_name: "foo", last_name: "bar", pin: "a")
+      ct1 = ClockTime.create!(employee_id:em1.id)
+      ct1.to_s.should == "#{em1.first_name} #{em1.last_name}: #{I18n.t("clock_time.clockin.true")} #{ct1.created_at}"
+    end
+  end
 end

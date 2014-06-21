@@ -1,7 +1,13 @@
-<div id="content-box">
-  <%= form_for @employee, url: clock_time_index_path do |f| %>
-    <%= f.text_field :pin %>
-    <%= f.submit %>
-  <% end %>
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= form_for @employee, url: clock_time_index_path do |f| %>
+      <%= f.text_field :pin %>
+      <%= f.submit "Search", class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<%= link_to t('employee.new'), new_employee_path %>
+<div class="row">
+  <%= link_to t('employee.new'), new_employee_path %>
+</div>

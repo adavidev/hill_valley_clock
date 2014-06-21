@@ -1,5 +1,10 @@
-<h1>Editing employee</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @employee %> |
+<div class="panel panel-default">
+  <div class='panel-heading'><%= t("employee.edit") %></div>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <div class="btn-group btn-group-justified">
+      <%= link_to 'Show', @employee, { class:"btn btn-default" } %>
+      <%= link_to t("cancel"), employees_path, { class:"btn btn-default" } %>
+    </div>
+  </div>
+</div>

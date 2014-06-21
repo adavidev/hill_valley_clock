@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
  */
+
+ .main-container {
+   padding-top: 100px;
+ }
+
+.alerts {
+  position:fixed !important;
+  top: 10px;
+}

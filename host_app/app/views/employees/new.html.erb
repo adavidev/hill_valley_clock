@@ -1,3 +1,9 @@
-<h1><%= t("employee.create") %></h1>
-
-<%= render 'form' %>
+<div class="panel panel-default">
+  <div class='panel-heading'><%= t("employee.create") %></div>
+  <div class="panel-body">
+    <%= render 'form' %>
+    <div class="btn-group btn-group-justified">
+      <%= link_to t("cancel"), employees_path, { class:"btn btn-default" } %>
+    </div>
+  </div>
+</div>

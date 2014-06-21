@@ -4,12 +4,17 @@
 en:
   cancel: "Cancel"
   save: "Save"
+  clock_time:
+    clockin:
+      "true": "in"
+      "false": "out"
   employee:
     not_found: "Employee not found"
     new: 'New Employee'
+    edit: 'Editing employee'
     successfully_created: 'Employee was successfully created.'
     failed_create: 'Failed to create employee.'
-    successfully_update: 'Employee was successfully updated.'
+    successfully_updated: 'Employee was successfully updated.'
     first_name: "First name"
     last_name: "Last name"
     pin: "ID"
@@ -17,3 +22,4 @@ en:
     create: "Create new employee"
     clocked_in: "Clocked in"
     clock_in_success: "Successfully clocked in."
+    clocked: "Clocked "

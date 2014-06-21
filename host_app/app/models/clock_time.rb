@@ -22,4 +22,8 @@ class ClockTime < ActiveRecord::Base
     self.clockin = last ? !last.clockin : true
     true # because if clockin resolves to false, it wont create
   end
+
+  def to_s
+    "#{employee.first_name} #{employee.last_name}: #{I18n.t("clock_time.clockin.#{clockin}")} #{created_at}"
+  end
 end

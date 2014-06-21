@@ -7,18 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <%= yield %>
-
-  <% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
-  <% if flash[:errors] %>
-  <div id="error_explanation">
-      <% flash[:errors].each do |msg| %>
-      <div><%= msg %></div>
-      <% end %>
+  <div class="main-container col-md-6 col-md-offset-3 text-center">
+    <%= yield %>
   </div>
-  <% end %>
+  <div class="alerts col-md-6 col-md-offset-3 text-center">
+    <% if flash[:errors] %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" onclick="$('.alert-danger').hide()">×</button>
+      <div id="error_explanation">
+        <% flash[:errors].each do |msg| %>
+        <div><%= msg %></div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+    <% if flash[:notice] %>
+    <div class="alert alert-dismissable alert-info">
+      <button type="button" class="close" onclick="$('.alert-danger').hide()">×</button>
+      <div class="notice"><%= flash[:notice] %></div>
+    </div>
+    <% end %>
+  </div>
 </body>
 </html>

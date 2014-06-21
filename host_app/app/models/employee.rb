@@ -31,6 +31,8 @@ class Employee < ActiveRecord::Base
   end
 
   def last_weeks_clocks
-    # ClockTime.
+    clock_times = ClockTime.for_date_range(DateTime.now - 7, DateTime.now)
+
+    employee_type == "employee" ? clock_times.for_employee(id) : clock_times
   end
 end
